@@ -7,13 +7,18 @@ export default function WeatherPage() {
     const [weatherData, setWeatherData] = useState([]);
     const [selectedArea, setSelectedArea] = useState("");
     const [forecast, setForecast] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
+        setError("");
+        setForecast("");
         const fetchWeather = async () => {
             try {
                 const response = await api.get("/weather");
                 setWeatherData(response.data.data);
-            } catch (error) {}
+            } catch (error) {
+                setError("An unexpected error occurred");
+            }
         };
         fetchWeather();
     }, []);
@@ -47,6 +52,9 @@ export default function WeatherPage() {
                     ))}
                 </select>
             </div>
+            
+            {/* display error message */}
+            {error && <span className="text-red-500">{error}</span>}
 
             {/* display forecast for the selected area */}
             <span className={`mt-2 min-h-[40px]`}>
