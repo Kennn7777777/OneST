@@ -45,7 +45,7 @@ export default function WeatherPage() {
                     value={selectedArea}
                 >
                     <option value="">Select an area</option>
-                    {weatherData.map((weather) => (
+                    {weatherData && weatherData.map((weather) => (
                         <option key={weather.area} value={weather.area}>
                             {weather.area}
                         </option>

@@ -13,9 +13,9 @@ const router = express.Router();
 
 router.get('/weather', async (req, res) => {
     try {
-       const response = await axios.get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast/");
+       const response = await axios.get("https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast/");
        
-       return res.status(200).json({ data: response.data.items[0].forecasts });
+       return res.status(200).json({ data: response.data.data.items[0].forecasts });
 
     } catch (error) {
         return res.status(500).json({ error: "Failed to fetch weather forecast"});
